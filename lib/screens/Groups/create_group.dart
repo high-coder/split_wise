@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:neopop/neopop.dart';
 import 'package:split/controllers/currentState.dart';
@@ -72,6 +73,10 @@ class _CreateGroupState extends State<CreateGroup> {
                     Expanded(
                       flex: 10,
                       child:TextFormField(
+                        keyboardType: TextInputType. number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         controller: budget,
                         style: MyTextStyle.text2,
                         decoration: const InputDecoration(
@@ -105,6 +110,8 @@ class _CreateGroupState extends State<CreateGroup> {
                   onTapUp: () {
                     if(name.text.isNotEmpty && budget.text.isNotEmpty) {
                       _instance.createGroup(name: name.text,budget:budget.text);
+                    } else {
+                      _instance.showMessage("Enter all data", "Error");
                     }
                   },
                   child: Padding(

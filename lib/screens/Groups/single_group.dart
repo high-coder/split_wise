@@ -61,7 +61,16 @@ class _SingleGroupState extends State<SingleGroup> {
                   _instance.selectedGroup?.end == false
               ? GestureDetector(
                   onTap: () {
-                    Get.to(() => AddExpense());
+                    double total = 0;
+                    _instance.selectedGroup?.transactions
+                        ?.forEach((element) {
+                      total += double.parse(element.amount);
+                    });
+
+                    remaining = double.parse(
+                        _instance.selectedGroup?.budget! ?? "0") -
+                        total;
+                    Get.to(() => AddExpense(remaining: remaining,));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -265,10 +274,16 @@ class _SingleGroupState extends State<SingleGroup> {
                               child: Text("End group"))
                           : Container(),
                       _instance.selectedGroup?.end == true
-                          ? Container(
-                              child: Text(
-                                  "The group has ended with remaining dues ${_instance.selectedGroup?.remaining} divided equally among all users"),
-                            )
+                          ? Builder(
+                        builder:(context) {
+                          int length =_instance.selectedGroup?.members.length ?? 1;
+                          double remainingT = _instance.selectedGroup?.remaining ?? 0.0;
+                          return Container(
+                            child: Text(
+                                "The group has ended with ${remaining/length} divided equally among all users"),
+                          );
+                        }
+                      )
                           : Container(),
                     ],
                   )),

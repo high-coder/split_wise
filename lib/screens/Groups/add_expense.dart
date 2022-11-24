@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:split/controllers/currentState.dart';
@@ -7,7 +8,8 @@ import 'package:split/utils/our_text_styles.dart';
 import 'package:split/utils/screen_loader.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({Key? key}) : super(key: key);
+  double remaining;
+  AddExpense({Key? key,required this.remaining}) : super(key: key);
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -70,6 +72,10 @@ class _AddExpenseState extends State<AddExpense> {
                     Expanded(
                       flex: 10,
                       child:TextFormField(
+                        keyboardType: TextInputType. number,
+                        inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                        ], // Only numbers can be entered.
                         controller: amount,
                         style: MyTextStyle.text2,
                         decoration: const InputDecoration(
@@ -102,8 +108,15 @@ class _AddExpenseState extends State<AddExpense> {
                   color: Colors.green,
                   onTapUp: () async{
                     if(description.text.isNotEmpty && amount.text.isNotEmpty) {
+                      print(widget.remaining);
                       //_instance.createGroup(name: name.text);
-                      await _instance.addExpense(description: description.text, amount: amount.text);
+                      if(widget.remaining>= double.parse(amount.text)) {
+                        await _instance.addExpense(description: description.text, amount: amount.text);
+                      } else {
+                        _instance.showMessage("Budget will be excedded with this transaction", "Error");
+                      }
+                    } else {
+                      _instance.showMessage("Please enter all fields", "Missing Information");
                     }
                   },
                   child: Padding(

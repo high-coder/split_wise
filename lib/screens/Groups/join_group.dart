@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:split/utils/screen_loader.dart';
@@ -35,6 +36,10 @@ class _JoinGroupState extends State<JoinGroup> {
                     Expanded(
                       flex: 10,
                       child: TextFormField(
+                        keyboardType: TextInputType. number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         controller: name,
                         style: MyTextStyle.text2,
                         decoration: const InputDecoration(

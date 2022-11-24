@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:split/screens/Login/forgot_password.dart';
 import 'package:split/screens/ReusableWidgets/button.dart';
 import 'package:split/screens/Signup/signup_screen.dart';
 import 'package:split/splash_screen.dart';
@@ -199,6 +200,7 @@ class _OurLoginPageState extends State<OurLoginPage> {
                         GestureDetector(
                           onTap: () {
                             //Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPassword()));
+                            Get.to(() => ForgotPassword());
                           },
                           child:const Align(
                             alignment: Alignment.bottomRight,
@@ -208,6 +210,19 @@ class _OurLoginPageState extends State<OurLoginPage> {
                             ),
                           ),
                         ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPassword()));
+                        //   },
+                        //   child:const Align(
+                        //     alignment: Alignment.bottomRight,
+                        //     child: Text(
+                        //       "Forgot password?",
+                        //       style: MyTextStyle.text1,
+                        //     ),
+                        //   ),
+                        // ),
+
                         !isLoading
                             ? GestureDetector(
                           onTap: () {

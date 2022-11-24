@@ -9,6 +9,7 @@ import 'package:split/screens/HomeScreen/home_screen.dart';
 import 'package:split/screens/Login/login_screen.dart';
 import 'package:split/screens/Signup/signup_screen.dart';
 import 'package:split/services/our_database.dart';
+import 'package:split/utils/our_text_styles.dart';
 
 import '../screens/Groups/single_group.dart';
 
@@ -112,6 +113,7 @@ class CurrentState extends GetxController {
           budget: retVal["budget"],
           createdAt: retVal["created_at"]);
       Get.to(() => SingleGroup());
+      fetchAllGroups();
       // navigate the user to the groups page
     } else {
       // show user the error message
@@ -144,7 +146,7 @@ class CurrentState extends GetxController {
 
 
   showMessage(String messageText,String title) {
-    Get.showSnackbar(GetSnackBar(messageText: Text(messageText),title: title,));
+    Get.showSnackbar(GetSnackBar(messageText: Text(messageText,style: MyTextStyle.referEarnTextW,),title: title,));
   }
   List<GroupModel> groups = [];
   fetchAllGroups() async{

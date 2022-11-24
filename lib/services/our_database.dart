@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:split/controllers/currentState.dart';
@@ -210,7 +209,7 @@ class OurDatabase {
           .doc(_instance.selectedGroup?.groupUid)
           .update({
         "end":true,
-        "remaining":remaining,
+        "remaining":remaining
       });
     } catch (e) {}
   }

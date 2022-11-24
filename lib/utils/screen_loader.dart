@@ -27,7 +27,7 @@ class ScreenLoader extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.3),
               ),
-              child: Center(child: Lottie.asset("assets/lottie/airplane.json")),
+             // child: Center(child: Lottie.asset("assets/lottie/airplane.json")),
             ),
           ),
         ))
